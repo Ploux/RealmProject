@@ -6,16 +6,22 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct ContentView: View {
+    
+    @ObservedResults(Group.self) var groups
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        if let group = groups.first {
+            ItemListView(group: group)
         }
-        .padding()
+        else {
+            ProgressView()
+                .onAppear {
+                    $groups.append(Group())
+                }
+        }
     }
 }
 
