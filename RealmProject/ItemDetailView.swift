@@ -13,6 +13,10 @@ struct ItemDetailView: View {
     // @ObservedObject // @Binding
     @ObservedRealmObject var item: Item
     
+    @Environment(\.realm) var realm
+    @Environment(\.realmConfiguration) var conf
+    
+    
     var body: some View {
         VStack (alignment: .leading) {
             Text("Enter a new name:")
@@ -25,6 +29,14 @@ struct ItemDetailView: View {
             })
             
             Button {
+                if let newItem = item.thaw(),
+                   let realm = newItem.realm {
+                    
+                    try? realm.write {
+                        // newItem.name = "name"
+                        realm.delete(newItem)
+                    }
+                }
 
             } label: {
                 Text("delete")
