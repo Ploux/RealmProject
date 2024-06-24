@@ -49,6 +49,6 @@ struct ItemDetailView: View {
 
 #Preview {
     NavigationView {
-        ItemDetailView(item: Item())
+        ItemDetailView(item: Item.previewExample())
     }
 }

@@ -15,6 +15,17 @@ final class Item: Object, ObjectKeyIdentifiable {
     @Persisted var isFavorite = false
 
     @Persisted(originProperty: "items") var group: LinkingObjects<Group>
+    
+    convenience init(name: String, isFavorite: Bool) {
+        self.init()
+        self.name = name
+        self.isFavorite = isFavorite
+    }
+    
+    static func previewExample() -> Item {
+        Item(name: "fluffy preview", isFavorite: true)
+    }
+    
 }
     /// Random adjectives for more interesting demo item names
     let randomAdjectives = [
